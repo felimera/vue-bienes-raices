@@ -5,6 +5,7 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 
 export const useAuthStore = defineStore("auth", () => {
     const auth = useFirebaseAuth();
+    const authUser = ref({});
 
     const errorMsg = ref("");
 
@@ -15,7 +16,10 @@ export const useAuthStore = defineStore("auth", () => {
 
     const login = ({ email, password }) => {
         signInWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => console.log(userCredential))
+            .then((userCredential) => {
+                const user = userCredential.user
+                authUser.value = user;
+            })
             .catch((error) => (errorMsg.value = errorCodes[error.code]));
     };
 
@@ -26,6 +30,6 @@ export const useAuthStore = defineStore("auth", () => {
     return {
         login,
         hasError,
-        errorMsg,
+        errorMsg, authUser
     };
 });
