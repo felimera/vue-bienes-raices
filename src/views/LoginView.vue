@@ -23,6 +23,8 @@ const submit = handleSubmit(values => auth.login(values));
             Inicia Sesión con tu cuenta
         </v-card-subtitle>
 
+        <v-alert class="my-5" type="error" title="Alert title"></v-alert>
+
         <v-form class="mt-5">
             <v-text-field type="email" label="Email" bg-color="blue-grey-lighten-5" class="mb-3" v-model="email.value.value"
                 :error-messages="email.errorMessage.value" />
