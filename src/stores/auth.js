@@ -31,13 +31,15 @@ export const useAuthStore = defineStore("auth", () => {
             .catch((error) => (errorMsg.value = errorCodes[error.code]));
     };
 
-    const hasError = computed(() => {
-        return errorMsg.value;
-    });
+    const hasError = computed(() => errorMsg.value);
+
+    const isAuth = computed(() => authUser.value);
 
     return {
         login,
         hasError,
-        errorMsg, authUser
+        errorMsg,
+        authUser,
+        isAuth
     };
 });
