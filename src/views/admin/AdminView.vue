@@ -2,8 +2,9 @@
 import usePropiedades from '../../composables/usePropiedades';
 import { doc, deleteDoc } from "firebase/firestore";
 import { useFirestore, useDocument } from 'vuefire';
+import { propertyPrice } from '@/helpers';
 
-const { propiedadesCollection, propertyPrice } = usePropiedades();
+const { propiedadesCollection } = usePropiedades();
 
 console.log('propiedadesCollection', propiedadesCollection);
 
