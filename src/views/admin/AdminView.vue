@@ -25,7 +25,8 @@ console.log('propiedadesCollection', propiedadesCollection);
 
                 <template v-slot:append>
 
-                    <v-btn color="info" variant="flat" class="mr-2"> Editar </v-btn>
+                    <v-btn color="info" variant="flat" class="mr-2"
+                        :to="{ name: 'editar-propiedad', params: { id: propiedad.id } }"> Editar </v-btn>
                     <v-btn color="red-darken-3" variant="flat"> Eliminar </v-btn>
                 </template>
 
