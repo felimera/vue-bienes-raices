@@ -54,7 +54,13 @@ const submit=handleSubmit(async values=>{
     const {imagen,...propiedad}=values;
     if(image.value)
     {
-
+        const data={
+        ...propiedad,
+        imagen:url.value,
+        ubicacion:center.value
+    }
+    console.log('data',data)
+    await updateDoc(docRef,data)
     }else{
     const data={
         ...propiedad,
