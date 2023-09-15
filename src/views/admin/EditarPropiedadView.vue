@@ -1,8 +1,8 @@
 <script setup>
 import {watch}from 'vue';
-import { useRoute } from 'vue-router';
+import { useRoute,useRouter } from 'vue-router';
 import { useFirestore, useDocument } from 'vuefire';
-import { doc, updateDoc } from 'firebase/firestore';
+import { doc, updateDoc } from "firebase/firestore";
 
 import { useField, useForm } from 'vee-validate'
 import "leaflet/dist/leaflet.css";
@@ -32,6 +32,7 @@ const descripcion = useField('descripcion')
 const alberca = useField('alberca')
 
 const route = useRoute();
+const router = useRouter();
 
 // Obtener la propieda a editar
 const db = useFirestore();
@@ -49,8 +50,20 @@ watch(propiedad, (propiedad) => {
       center.value = propiedad.ubicacion
   });
 
-const submit=handleSubmit(values=>{
-console.log(values);
+const submit=handleSubmit(async values=>{
+    const {imagen,...propiedad}=values;
+    if(image.value)
+    {
+
+    }else{
+    const data={
+        ...propiedad,
+        ubicacion:center.value
+    }
+    console.log('data',data)
+    await updateDoc(docRef,data)
+    }
+    router.push({name:'admin-propiedades'});
 });
 
 </script>
