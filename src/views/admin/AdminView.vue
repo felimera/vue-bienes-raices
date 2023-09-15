@@ -1,23 +1,8 @@
 <script setup>
 import usePropiedades from '../../composables/usePropiedades';
-import { doc, deleteDoc } from "firebase/firestore";
-import { useFirestore, useDocument } from 'vuefire';
 import { propertyPrice } from '@/helpers';
 
-const { propiedadesCollection } = usePropiedades();
-
-console.log('propiedadesCollection', propiedadesCollection);
-
-const eliminarRegistro = async (id) => {
-    const db = useFirestore();
-    const docRef = doc(db, 'propiedades', id);
-    const propiedad = useDocument(docRef);
-    console.log('propiedad', propiedad);
-
-    await deleteDoc(doc(db, "propiedades", propiedad));
-
-    router.push({ name: 'admin-propiedades' });
-}
+const { propiedadesCollection, deleteItem } = usePropiedades();
 </script>
 
 <template>
@@ -41,7 +26,7 @@ const eliminarRegistro = async (id) => {
 
                     <v-btn color="info" variant="flat" class="mr-2"
                         :to="{ name: 'editar-propiedad', params: { id: propiedad.id } }"> Editar </v-btn>
-                    <v-btn color="red-darken-3" variant="flat" @click="eliminarRegistro(propiedad.id)"> Eliminar </v-btn>
+                    <v-btn color="red-darken-3" variant="flat" @click="deleteItem(propiedad.id)"> Eliminar </v-btn>
                 </template>
 
             </v-list-item>
